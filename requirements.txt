@@ -1,0 +1,5 @@
+boto3==1.18.39
+lxml==4.6.3
+openai==0.27.2
+PyYAML==6.0
+streamlit==1.16.0

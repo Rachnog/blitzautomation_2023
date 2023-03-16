@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>src package &mdash; Blitzautomation2023 March 2023 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="src" href="modules.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Blitzautomation2023
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">src</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">src package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-src.drawio_utils">src.drawio_utils module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#src.drawio_utils.XMLToDrawIOConverter"><code class="docutils literal notranslate"><span class="pre">XMLToDrawIOConverter</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-src.gpt_wrappers">src.gpt_wrappers module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#src.gpt_wrappers.ChatGPTWithMemory"><code class="docutils literal notranslate"><span class="pre">ChatGPTWithMemory</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-src.quality_checks">src.quality_checks module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#src.quality_checks.XMLQualityCheck"><code class="docutils literal notranslate"><span class="pre">XMLQualityCheck</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-src.xml_utils">src.xml_utils module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#src.xml_utils.save_xml_string_to_file"><code class="docutils literal notranslate"><span class="pre">save_xml_string_to_file()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-src">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Blitzautomation2023</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">src</a></li>
+      <li class="breadcrumb-item active">src package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/src.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="src-package">
+<h1>src package<a class="headerlink" href="#src-package" title="Permalink to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading"></a></h2>
+</section>
+<section id="module-src.drawio_utils">
+<span id="src-drawio-utils-module"></span><h2>src.drawio_utils module<a class="headerlink" href="#module-src.drawio_utils" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="src.drawio_utils.XMLToDrawIOConverter">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.drawio_utils.</span></span><span class="sig-name descname"><span class="pre">XMLToDrawIOConverter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xml_input</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/drawio_utils.html#XMLToDrawIOConverter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.drawio_utils.XMLToDrawIOConverter" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="src.drawio_utils.XMLToDrawIOConverter.convert">
+<span class="sig-name descname"><span class="pre">convert</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/drawio_utils.html#XMLToDrawIOConverter.convert"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.drawio_utils.XMLToDrawIOConverter.convert" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.drawio_utils.XMLToDrawIOConverter.generate_drawio_content">
+<span class="sig-name descname"><span class="pre">generate_drawio_content</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parent_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/drawio_utils.html#XMLToDrawIOConverter.generate_drawio_content"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.drawio_utils.XMLToDrawIOConverter.generate_drawio_content" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-src.gpt_wrappers">
+<span id="src-gpt-wrappers-module"></span><h2>src.gpt_wrappers module<a class="headerlink" href="#module-src.gpt_wrappers" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="src.gpt_wrappers.ChatGPTWithMemory">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.gpt_wrappers.</span></span><span class="sig-name descname"><span class="pre">ChatGPTWithMemory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">system_prompt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'gpt-3.5-turbo'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/gpt_wrappers.html#ChatGPTWithMemory"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.gpt_wrappers.ChatGPTWithMemory" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A wrapper for the OpenAI Chat API that allows for a memory to be maintained
+between calls to the API. This is useful for a chatbot that is maintaining
+a conversation with a user.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="src.gpt_wrappers.ChatGPTWithMemory.generate">
+<span class="sig-name descname"><span class="pre">generate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">question</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/gpt_wrappers.html#ChatGPTWithMemory.generate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.gpt_wrappers.ChatGPTWithMemory.generate" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.gpt_wrappers.ChatGPTWithMemory.initialize_with_question_answer">
+<span class="sig-name descname"><span class="pre">initialize_with_question_answer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">question</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">answer</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/gpt_wrappers.html#ChatGPTWithMemory.initialize_with_question_answer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.gpt_wrappers.ChatGPTWithMemory.initialize_with_question_answer" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-src.quality_checks">
+<span id="src-quality-checks-module"></span><h2>src.quality_checks module<a class="headerlink" href="#module-src.quality_checks" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="src.quality_checks.XMLQualityCheck">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.quality_checks.</span></span><span class="sig-name descname"><span class="pre">XMLQualityCheck</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xml_file</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/quality_checks.html#XMLQualityCheck"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.quality_checks.XMLQualityCheck" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Class for XML quality checks, check if the xml file is valid, has a minimum depth and width
+Input is a file path to the XML file</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="src.quality_checks.XMLQualityCheck.check_xml">
+<span class="sig-name descname"><span class="pre">check_xml</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/quality_checks.html#XMLQualityCheck.check_xml"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.quality_checks.XMLQualityCheck.check_xml" title="Permalink to this definition"></a></dt>
+<dd><p>Check if the xml file is valid</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.quality_checks.XMLQualityCheck.get_the_depth">
+<span class="sig-name descname"><span class="pre">get_the_depth</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/quality_checks.html#XMLQualityCheck.get_the_depth"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.quality_checks.XMLQualityCheck.get_the_depth" title="Permalink to this definition"></a></dt>
+<dd><p>Get the depth of the xml file as the deepest level of the xml tree</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.quality_checks.XMLQualityCheck.get_the_width">
+<span class="sig-name descname"><span class="pre">get_the_width</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/quality_checks.html#XMLQualityCheck.get_the_width"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.quality_checks.XMLQualityCheck.get_the_width" title="Permalink to this definition"></a></dt>
+<dd><p>Get the width of the xml file as the maximum number of children of a node</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-src.xml_utils">
+<span id="src-xml-utils-module"></span><h2>src.xml_utils module<a class="headerlink" href="#module-src.xml_utils" title="Permalink to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="src.xml_utils.save_xml_string_to_file">
+<span class="sig-prename descclassname"><span class="pre">src.xml_utils.</span></span><span class="sig-name descname"><span class="pre">save_xml_string_to_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xml_string</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_file</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/xml_utils.html#save_xml_string_to_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.xml_utils.save_xml_string_to_file" title="Permalink to this definition"></a></dt>
+<dd><p>Save the xml string to a file</p>
+</dd></dl>
+
+</section>
+<section id="module-src">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-src" title="Permalink to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="modules.html" class="btn btn-neutral float-left" title="src" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Alex Honchar.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
