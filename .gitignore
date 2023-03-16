@@ -1,0 +1,7 @@
+config.yml
+data/
+.gitingore
+notebooks/wandb
+*.ipynb_checkpoints
+*.pytest_cache
+*__pycache__

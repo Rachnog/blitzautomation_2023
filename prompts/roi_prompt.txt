@@ -1,0 +1,38 @@
+I am building an AI app that generates mindmaps from text.
+I want to calculate the ROI over time, month by month. Assume the following variables:
+
+Costs:
+- team costs: $10'000 / month
+- cloud costs: $300 / month
+- an average single generation cost: $0.1 per cloud API
+
+Revenue:
+- paying users pay $1 per each generation
+
+Users:
+- initial number of users - 50 monthly
+- initial number of generations per user monthly - 10 monthly
+- the percentage of paying users - 10% monthly
+
+Growth:
+- growth of team costs - 10% quarterly 
+- growth of cloud costs - 5% monthly
+- growth of users per month - 50% monthly
+- growth of the number of generations per free-tier user per month - 10% monthly
+- growth of the number of generations per paying user per month - 50% monthly
+- growth of the percentage of paying customers - 20% monthly
+
+The table should have the following columns with the ROI:
+- month
+- users monthly
+- the percentage of paying users
+- paying users monthly
+- generations monthly
+- generations monthly of paying users
+- monthly cost (sum of team, cloud and generation costs of all users, paying and not paying)
+- monthly revenue (only from paying users)
+- cumulative revenue (only from paying users)
+- monthly ROI, in $
+- cumulative ROI, in $
+
+Generate a $ ROI table (cumulative and monthly), each row is a month, for 12 months

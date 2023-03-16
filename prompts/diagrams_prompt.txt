@@ -1,0 +1,10 @@
+Create Python code that can generate and save a visual diagram of a software architecture. 
+
+The parts of the diagram are:
+- AWS S3 bucket as a data lake
+- AWS Sagemaker hosting a custom ML model
+- AWS EC2 instance hosting the backend web app
+- AWS EC2 instance hosting the frontend web app
+- 3rd party API (OpenAI) used in the backend web app
+
+The backend app takes data from the data lake and sends requests to the OpenAI API and custom ML model. The Frontend app is sending requests to the backend app.
