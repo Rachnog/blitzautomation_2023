@@ -1,14 +1,11 @@
 import streamlit as st
 
 import openai
-import json
 import yaml
 import boto3
 
 import sys
 import os
-
-import wandb
 
 sys.path.append(os.path.abspath(os.path.join(os.getcwd(), os.pardir)))
 
@@ -20,7 +17,8 @@ from src.drawio_utils import *
 from content import AppPrompts
 
 # Load config
-with open('../config.yml') as f:
+config_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'config.yml')
+with open(config_path) as f:
     config = yaml.load(f, Loader=yaml.FullLoader)
 
 openai.api_key = config['OPENAI_KEY']
@@ -58,12 +56,12 @@ if st.button("Generate Mindmap"):
     chatgpt = ChatGPTWithMemory(app_prompts.system_prompt)
     chatgpt.initialize_with_question_answer(app_prompts.example_question, app_prompts.example_answer)
     answer = chatgpt.generate(question)
-    save_xml_string_to_file(answer, '../data/text.xml')
+    # save_xml_string_to_file(answer, '../data/text.xml')
 
     converter = XMLToDrawIOConverter(answer)
     drawio_xml = converter.convert()
-    with open('../data/text.drawio', "w") as f:
-        f.write(drawio_xml)
+    # with open('../data/text.drawio', "w") as f:
+    #     f.write(drawio_xml)
 
     # create hash for the text
     text_hash = hash(text)
@@ -76,7 +74,9 @@ if st.button("Generate Mindmap"):
     s3.Object(config['AWS_S3_BUCKET'], f'drawios/{text_hash}.drawio').put(Body=drawio_xml)
 
     st.subheader('Mindmap XML')
+    st.text('S3 path: s3://'+config['AWS_S3_BUCKET']+'/XMLs/'+str(text_hash)+'.xml')
     st.text_area("", value=answer)
 
     st.subheader('Mindmap draw.io')
+    st.text('S3 path: s3://'+config['AWS_S3_BUCKET']+'/drawios/'+str(text_hash)+'.drawio')
     st.text_area("", value=drawio_xml)
