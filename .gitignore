@@ -7,3 +7,4 @@ notebooks/wandb
 *.pytest_cache
 *__pycache__
 .vscode
+task-definition.json

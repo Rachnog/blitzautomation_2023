@@ -14,7 +14,7 @@ from src.quality_checks import *
 from src.xml_utils import *
 from src.drawio_utils import *
 
-from content import AppPrompts
+from content import AppPromptsMindmap, AppPromptsQuestions
 
 # Load config
 config_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'config.yml')
@@ -29,54 +29,65 @@ s3 = boto3.resource(
     aws_secret_access_key=config['AWS_SECRET_ACCESS_KEY']
 )
 
-app_prompts = AppPrompts()
+app_prompts_mindmap = AppPromptsMindmap()
+app_prompts_questions = AppPromptsQuestions()
 
-st.title("Mindmaps automated")
-st.subheader('Enter your text here')
+st.title("Professor Copilot :sunglasses:")
+st.subheader('Your study material here :books:')
 text = st.text_area(value=
     """
-        Our culture represents the set of ideas, knowledge and traditions that we stand for.
-        It’s not by chance that we have a strong culture based on specific values. When in 2011, amidst the financial crisis, we left our safe jobs at a big corp to create a place we’d love to work at, we knew how privileged we were.
-        We tirelessly work to put our skills and expertise to good use. In other words, we make sure we are playing an active role in building a better society.
-        We have very clear red lines.
-        Pursuing diversity or open source is smart; Honestly, even more important, we believe it's simply fair. 
+        Richard Ward, 32, was fatally shot on February 22, 2022, by Pueblo County deputy Charles McWhorter during an incident in Liberty Point International Middle School in Pueblo West, Colorado.[1]
+        Ward was questioned by the police after being observed attempting to enter a car that was not his in the middle school's parking lot.[2] He was asked for his identification and if he had any weapons on his person. After admitting that he may be armed with a knife, he appeared to put something in his mouth. McWhorter, one of two deputies at the scene, forcefully removed Ward out of the car and placed him on the ground, shortly before shooting him three times in the chest.[3]
+        After reviewing the results, District Attorney Jeff Chostner determined that the deputies' actions were "rational and justified" because they "believed their lives or the lives of others were in jeopardy".[3] McWhorter earned a Purple Heart award from the Pueblo County Sheriff's Office for allegedly sustaining injuries during the incident. On February 21, 2023, Ward's family filed a federal lawsuit against McWhorter and his agency.[2]
     """, label=""
 )
 
-if st.button("Generate Mindmap"):
+if st.button("Generate Mindmap and Questions"):
 
-    st.write("Generating Mindmap...")
-
-    question = \
-    f"""
-        Generate the mindmap from the following text:
-        {text}
-    """
-
-    chatgpt = ChatGPTWithMemory(app_prompts.system_prompt)
-    chatgpt.initialize_with_question_answer(app_prompts.example_question, app_prompts.example_answer)
-    answer = chatgpt.generate(question)
-    # save_xml_string_to_file(answer, '../data/text.xml')
+    chatgpt_mindmap = ChatGPTWithMemory(app_prompts_mindmap.system_prompt)
+    chatgpt_mindmap.initialize_with_question_answer(app_prompts_mindmap.example_question, app_prompts_mindmap.example_answer)
+    answer = chatgpt_mindmap.generate(
+        app_prompts_mindmap.get_question_prompt(text)
+    )
+    save_xml_string_to_file(answer, '../data/text.xml')
 
     converter = XMLToDrawIOConverter(answer)
     drawio_xml = converter.convert()
-    # with open('../data/text.drawio', "w") as f:
-    #     f.write(drawio_xml)
+    with open('../data/text.drawio', "w") as f:
+        f.write(drawio_xml)
+
+
+    chatgpt_questions = ChatGPTWithMemory(app_prompts_questions.system_prompt)
+    chatgpt_questions.initialize_with_question_answer(app_prompts_questions.example_question, app_prompts_questions.example_answer)
+    questions = chatgpt_questions.generate(
+        app_prompts_questions.get_question_prompt(text)
+    )
 
     # create hash for the text
     text_hash = hash(text)
-
     # upload system_prompt as a text file to s3 to a folder queries
-    s3.Object(config['AWS_S3_BUCKET'], f'queries/{text_hash}.txt').put(Body=app_prompts.system_prompt)
+    s3.Object(config['AWS_S3_BUCKET'], f'queries/{text_hash}.txt').put(Body=app_prompts_mindmap.system_prompt)
     # upload answer as XML file to a folder XMLs
     s3.Object(config['AWS_S3_BUCKET'], f'XMLs/{text_hash}.xml').put(Body=answer)
     # upload answer as drawio file to a folder drawios
     s3.Object(config['AWS_S3_BUCKET'], f'drawios/{text_hash}.drawio').put(Body=drawio_xml)
+    # upload questions as a text file to a folder questions
+    s3.Object(config['AWS_S3_BUCKET'], f'questions/{text_hash}.txt').put(Body=questions)
 
-    st.subheader('Mindmap XML')
+    st.subheader(':computer: Mindmap XML')
     st.text('S3 path: s3://'+config['AWS_S3_BUCKET']+'/XMLs/'+str(text_hash)+'.xml')
     st.text_area("", value=answer)
 
-    st.subheader('Mindmap draw.io')
+    st.subheader(':brain: Mindmap draw.io')
     st.text('S3 path: s3://'+config['AWS_S3_BUCKET']+'/drawios/'+str(text_hash)+'.drawio')
     st.text_area("", value=drawio_xml)
+
+    st.subheader(':tophat: Questions')
+    st.text('S3 path: s3://'+config['AWS_S3_BUCKET']+'/questions/'+str(text_hash)+'.txt')
+    st.text_area("", value=questions)
+
+    st.subheader('Feedback :speech_balloon:')
+    feedback_text = st.text_area("", value="")
+    if st.button("Submit Feedback"):
+        # upload feedback as a text file to a folder feedback
+        s3.Object(config['AWS_S3_BUCKET'], f'feedback/{text_hash}.txt').put(Body=feedback_text)

@@ -51,3 +51,24 @@ class XMLQualityCheck:
             return 1
         else:
             return max(len(node), max(self._get_width(child) for child in node))
+        
+
+class TextToQuestionsQualityCheck:
+    """
+        Class for quality checks for the questions generated based on the text
+    """
+
+    def __init__(self, questions_string):
+        self.questions_string = questions_string
+
+    def _parse_questions(self):
+        """
+            Parse the questions string into a list of questions
+        """
+        return self.questions_string.split('\n')
+
+    def check_number_of_questions(self):
+        """
+            Return number of questions
+        """
+        return len(self._parse_questions())                          
