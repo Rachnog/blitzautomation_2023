@@ -46,6 +46,14 @@ class AppPromptsMindmap:
             Generate the mindmap from the following text:
             {text}
         """
+    
+    def to_dict(self, text):
+        return {
+            "system_prompt": self.system_prompt,
+            "example_question": self.example_question,
+            "example_answer": self.example_answer,
+            "question_prompt": self.get_question_prompt(text)
+        }
         
 class AppPromptsQuestions:
     """
@@ -82,3 +90,11 @@ class AppPromptsQuestions:
 
             Separate each thing with a new line (\n\n) so I can parse it later.
             """
+    
+    def to_dict(self, text):
+        return {
+            "system_prompt": self.system_prompt,
+            "example_question": self.example_question,
+            "example_answer": self.example_answer,
+            "question_prompt": self.get_question_prompt(text)
+        }

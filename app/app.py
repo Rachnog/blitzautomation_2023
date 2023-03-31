@@ -2,6 +2,7 @@ import streamlit as st
 
 import openai
 import yaml
+import json
 import boto3
 
 import sys
@@ -50,12 +51,10 @@ if st.button("Generate Mindmap and Questions"):
         app_prompts_mindmap.get_question_prompt(text)
     )
     save_xml_string_to_file(answer, '../data/text.xml')
-
     converter = XMLToDrawIOConverter(answer)
     drawio_xml = converter.convert()
     with open('../data/text.drawio', "w") as f:
         f.write(drawio_xml)
-
 
     chatgpt_questions = ChatGPTWithMemory(app_prompts_questions.system_prompt)
     chatgpt_questions.initialize_with_question_answer(app_prompts_questions.example_question, app_prompts_questions.example_answer)
@@ -65,29 +64,40 @@ if st.button("Generate Mindmap and Questions"):
 
     # create hash for the text
     text_hash = hash(text)
-    # upload system_prompt as a text file to s3 to a folder queries
-    s3.Object(config['AWS_S3_BUCKET'], f'queries/{text_hash}.txt').put(Body=app_prompts_mindmap.system_prompt)
-    # upload answer as XML file to a folder XMLs
-    s3.Object(config['AWS_S3_BUCKET'], f'XMLs/{text_hash}.xml').put(Body=answer)
-    # upload answer as drawio file to a folder drawios
+
+    # make a JSON out of app_prompts_mindmap prompts
+    app_prompts_mindmap_dict = app_prompts_mindmap.to_dict(text)
+    app_prompts_questions_dict = app_prompts_questions.to_dict(text)
+    answer_dict = {
+        'xml': answer,
+        'drawio_xml': drawio_xml
+    }
+    questions_dict = {
+        'questions': questions
+    }
+
+    s3.Object(config['AWS_S3_BUCKET'], f'app_prompts_mindmap/{text_hash}.json').put(Body=json.dumps(app_prompts_mindmap_dict))
+    s3.Object(config['AWS_S3_BUCKET'], f'app_prompts_questions/{text_hash}.json').put(Body=json.dumps(app_prompts_questions_dict))
+    s3.Object(config['AWS_S3_BUCKET'], f'xmls/{text_hash}.json').put(Body=json.dumps(answer_dict))
     s3.Object(config['AWS_S3_BUCKET'], f'drawios/{text_hash}.drawio').put(Body=drawio_xml)
-    # upload questions as a text file to a folder questions
-    s3.Object(config['AWS_S3_BUCKET'], f'questions/{text_hash}.txt').put(Body=questions)
+    s3.Object(config['AWS_S3_BUCKET'], f'questions/{text_hash}.json').put(Body=json.dumps(questions_dict))
+
 
     st.subheader(':computer: Mindmap XML')
-    st.text('S3 path: s3://'+config['AWS_S3_BUCKET']+'/XMLs/'+str(text_hash)+'.xml')
     st.text_area("", value=answer)
 
     st.subheader(':brain: Mindmap draw.io')
-    st.text('S3 path: s3://'+config['AWS_S3_BUCKET']+'/drawios/'+str(text_hash)+'.drawio')
     st.text_area("", value=drawio_xml)
 
     st.subheader(':tophat: Questions')
-    st.text('S3 path: s3://'+config['AWS_S3_BUCKET']+'/questions/'+str(text_hash)+'.txt')
     st.text_area("", value=questions)
 
     st.subheader('Feedback :speech_balloon:')
     feedback_text = st.text_area("", value="")
+    feedback_json = {
+        'feedback': feedback_text
+    }
+
     if st.button("Submit Feedback"):
         # upload feedback as a text file to a folder feedback
-        s3.Object(config['AWS_S3_BUCKET'], f'feedback/{text_hash}.txt').put(Body=feedback_text)
+        s3.Object(config['AWS_S3_BUCKET'], f'feedbacks/{text_hash}.json').put(Body=json.dumps(feedback_json))
